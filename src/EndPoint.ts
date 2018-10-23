@@ -1,15 +1,18 @@
 import * as express from "express";
-import { HealthChecker } from './HealthChecker'
+import { HealthChecker } from "./HealthChecker";
+
+const router = express.Router();
 /**
  * Add one endpoints related to health check information.
- * @param app The express application
+ * @param healthChecker The HealthChecker object
  */
-const addEndPointHealthCheck = (app: express.Application) => {
-  app.get('/healthCheck', (req: express.Request, res: express.Response) => {
-    res.send(200).json(HealthChecker.prototype.serviceInfo);
-  });
+const addEndPointHealthCheck = (healthChecker: HealthChecker) => {
+  router.get('/healthCheck', (req: express.Request, res: express.Response) => {
+    res.send(200).json(healthChecker.serviceInfo);
+  })
 }
 
 export = {
   addEndPointHealthCheck,
+  router
 }
