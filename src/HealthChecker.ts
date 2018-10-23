@@ -5,7 +5,7 @@ import { IServiceInfo, IServiceInfoDynamic } from "./ServiceInfo";
 type Collector = (trigger: DataTrigger) => any;
 
 class HealthChecker {
-    private serviceInfo: IServiceInfoDynamic;
+    public serviceInfo: IServiceInfoDynamic;
 
     constructor(config: IServiceInfo) {
         this.serviceInfo = config;
