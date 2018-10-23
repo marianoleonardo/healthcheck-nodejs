@@ -9,9 +9,21 @@ const router = express.Router();
 
 const addEndPointHealthCheck = (healthChecker: HealthChecker) => {
   router.get('/healthCheck', (req: express.Request, res: express.Response) => {
-    res.send(200).json(healthChecker.serviceInfo);
+    const status = healthChecker.serviceInfo.status;
+    switch (status) {
+      case 'pass':
+        res.send(200).json(healthChecker.serviceInfo);
+        break;
+      case 'warn':
+        res.send(200).json(healthChecker.serviceInfo);
+        break;
+      case 'fail':
+        res.send(500).json(healthChecker.serviceInfo);
+        break;
+      default:
+        res.send(404).json();
+    }
   })
-
   return router;
 }
 
