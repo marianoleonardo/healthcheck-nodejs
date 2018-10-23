@@ -1,84 +1,50 @@
-type ServiceStatus = "pass" | "fail" | "warn";
-interface IComponentDetails {
-  status: ServiceStatus;
-  componentName?: string;
-  measurementName?: "utilization" | "responseTime" | "connections" | "uptime" | string;
-  componentId?: string;
-  componentType?: "component" | "datastore" | "system" | string;
-  observedUnit?: string;
-  links?: string;
-}
+import util = require("util");
+import { IComponentDetails } from "./ComponentDetails";
+import { DataTrigger } from "./DataTrigger";
+import { Collector, HealthChecker } from "./HealthChecker";
+import { IServiceInfoDynamic } from "./ServiceInfo";
 
-interface IComponentDetailsDynamic extends IComponentDetails {
-  observedValue?: any;
-  output?: string;
-  time?: string;
-}
+const config: IServiceInfoDynamic = {
+  description: "sample service",
+  links: "http://github.com/dojot",
+  notes: "note this!",
+  releaseId: "alpha",
+  status: "pass",
+  version: "1.0.0-alpha.1",
+};
 
-interface IServiceInfo {
-  status: ServiceStatus;
-  version?: string;
-  releaseId?: string;
-  notes?: string;
-  links?: string;
-  description?: string;
-}
+const healthChecker = new HealthChecker(config);
 
-interface IServiceInfoDynamic extends IServiceInfo {
-  detail?: {
-    [componentName: string]: IComponentDetailsDynamic;
-  };
-  serviceId?: string;
-  output?: string;
-}
+const monitor: IComponentDetails = {
+  componentId: "service-memory-1",
+  componentName: "total memory used",
+  componentType: "system",
+  links: "http://github.com/dojot/measurements",
+  measurementName: "memory",
+  observedUnit: "bytes",
+  status: "pass",
+};
 
-type DataTrigger = (data: any, status?: ServiceStatus, output?: string) => void;
-
-class HealthChecker {
-  private serviceInfo: IServiceInfoDynamic;
-
-  constructor(config: IServiceInfo) {
-    this.serviceInfo = this.serviceInfo;
+let i = 0;
+const collector: Collector = (trigger: DataTrigger) => {
+  i += 5;
+  // tslint:disable-next-line:no-console
+  console.log("incrementing i: " + i);
+  if (i > 20) {
+    trigger.trigger(i, "fail", "i too high");
   }
+  return i;
+};
 
-  public registerMonitor(monitor: IComponentDetails): DataTrigger  {
-    const fullMonitor: IComponentDetailsDynamic = monitor;
-    const monitorId = `${monitor.componentName}:${monitor.measurementName}`;
-    const dataTrigger: DataTrigger = (data: any, status?: ServiceStatus, output?: string) => {
-      fullMonitor.observedValue = data;
-      fullMonitor.status = status || "pass";
-      fullMonitor.output = output || "no-reason";
+healthChecker.registerMonitor(monitor, collector, 2000);
 
-      if (fullMonitor.status !== "pass") {
-        if (this.serviceInfo.status !== "fail") {
-          this.serviceInfo.status = fullMonitor.status;
-        }
-      } else {
-        // This is easier than keep track of everytime the user calls
-        // this function.
-        let warnings = 0;
-        let failures = 0;
-        for (const component in this.serviceInfo.detail) {
-          if (this.serviceInfo.detail.hasOwnProperty(component)) {
-            if (this.serviceInfo.detail[component].status === "fail") {
-              failures++;
-            } else if (this.serviceInfo.detail[component].status === "warn") {
-              warnings++;
-            }
-            if (failures !== 0) {
-              this.serviceInfo.status = "fail";
-            } else if (warnings !== 0) {
-              this.serviceInfo.status = "warn";
-            } else {
-              this.serviceInfo.status = "pass";
-            }
-          }
-        }
-      }
-    };
-
-    this.serviceInfo.detail[monitorId] = fullMonitor;
-
-    return dataTrigger;
-  }
+function printStatus() {
+  // tslint:disable-next-line:no-console
+  console.log(`current status: ${util.inspect(config, {depth: null})}`);
+  setTimeout(() => {
+    printStatus();
+  }, 1000);
 }
+setTimeout(() => {
+  printStatus();
+}, 1000);

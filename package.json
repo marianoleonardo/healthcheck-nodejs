@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://gitlab.com/giovannicuriel/healthcheck/issues"
   },
-  "homepage": "https://gitlab.com/giovannicuriel/healthcheck#README"
+  "homepage": "https://gitlab.com/giovannicuriel/healthcheck#README",
+  "dependencies": {
+    "@types/node": "^10.12.0"
+  }
 }
