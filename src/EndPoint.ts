@@ -7,26 +7,26 @@ const router = express.Router();
  * @param healthChecker The HealthChecker object
  */
 
-const addEndPointHealthCheck = (healthChecker: HealthChecker) => {
-  router.get('/healthCheck', (req: express.Request, res: express.Response) => {
+function getHTTPRouter(healthChecker: HealthChecker) {
+  router.get("/healthCheck", (_req: express.Request, res: express.Response) => {
     const status = healthChecker.serviceInfo.status;
     switch (status) {
-      case 'pass':
-        res.send(200).json(healthChecker.serviceInfo);
+      case "pass":
+        res.status(200).json(healthChecker.serviceInfo).send();
         break;
-      case 'warn':
-        res.send(200).json(healthChecker.serviceInfo);
+      case "warn":
+        res.status(200).json(healthChecker.serviceInfo).send();
         break;
-      case 'fail':
-        res.send(500).json(healthChecker.serviceInfo);
+      case "fail":
+        res.status(500).json(healthChecker.serviceInfo).send();
         break;
       default:
-        res.send(404).json();
+        res.status(404).json().send();
     }
-  })
+  });
   return router;
 }
 
-export = {
-  addEndPointHealthCheck
-}
+export {
+  getHTTPRouter,
+};
