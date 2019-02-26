@@ -6,7 +6,7 @@ import { IServiceInfoDynamic } from "./ServiceInfo";
 
 const config: IServiceInfoDynamic = {
   description: "sample service",
-  links: [{"about": "http://github.com/dojot"}],
+  links: [{about: "http://github.com/dojot"}],
   notes: ["note this!"],
   releaseId: "alpha",
   status: "pass",
@@ -19,7 +19,7 @@ const monitor: IComponentDetails = {
   componentId: "service-memory-1",
   componentName: "total memory used",
   componentType: "system",
-  links: [{"info": "http://github.com/dojot/measurements"}],
+  links: [{info: "http://github.com/dojot/measurements"}],
   measurementName: "memory",
   observedUnit: "bytes",
   status: "pass",

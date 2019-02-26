@@ -3,10 +3,10 @@ import { ServiceStatus } from "./types";
 interface IComponentDetails {
     // status(optional) - has the same meaning as the top-level 'status' element
     status?: ServiceStatus;
-    
+
     // componentName(optional) - human-readable name for the component
     componentName?: string;
-    
+
     // measurementName(optional) - name of the measurement type (a data point type) that
     //                             the status is reported for
     measurementName?: "utilization" | "responseTime" | "connections" | "uptime" | string;
@@ -23,11 +23,11 @@ interface IComponentDetails {
     observedUnit?: string;
 
     // links(optional) - has the same meaning as the top-lelve 'links' element
-    links?: Array<object>;
+    links?: object[];
 }
 
 interface IComponentDetailsDynamic extends IComponentDetails {
-    // observedValue(optional) - observed value 
+    // observedValue(optional) - observed value
     observedValue?: any;
     // output(optional) - has the same meaning as the top-level 'output'
     output?: string;
