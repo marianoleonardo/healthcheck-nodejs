@@ -28,14 +28,14 @@ class DataTrigger {
             // this function.
             let warnings = 0;
             let failures = 0;
-            if (this.serviceInfo.detail === undefined) {
+            if (this.serviceInfo.details === undefined) {
                 return;
             }
-            for (const component in this.serviceInfo.detail) {
-                if (this.serviceInfo.detail.hasOwnProperty(component)) {
-                    if (this.serviceInfo.detail[component].status === "fail") {
+            for (const component in this.serviceInfo.details) {
+                if (this.serviceInfo.details.hasOwnProperty(component)) {
+                    if (this.serviceInfo.details[component].status === "fail") {
                         failures++;
-                    } else if (this.serviceInfo.detail[component].status === "warn") {
+                    } else if (this.serviceInfo.details[component].status === "warn") {
                         warnings++;
                     }
                     if (failures !== 0) {
