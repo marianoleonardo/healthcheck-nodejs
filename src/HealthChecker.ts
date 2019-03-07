@@ -19,7 +19,7 @@ class HealthChecker {
         if (periodicity && collectFn) {
             this.runCollector(fullMonitor, dataTrigger, collectFn, periodicity);
         }
-        if(this.serviceInfo.details) {
+        if (this.serviceInfo.details) {
             this.serviceInfo.details[monitorId] = fullMonitor;
         }
         return dataTrigger;
