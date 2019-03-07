@@ -9,6 +9,7 @@ class HealthChecker {
 
     constructor(config: IServiceInfo) {
         this.serviceInfo = config;
+        this.serviceInfo.details = {};
     }
 
     public registerMonitor(monitor: IComponentDetails, collectFn?: Collector, periodicity?: number): DataTrigger {
@@ -18,8 +19,9 @@ class HealthChecker {
         if (periodicity && collectFn) {
             this.runCollector(fullMonitor, dataTrigger, collectFn, periodicity);
         }
-        this.serviceInfo.details = {};
-        this.serviceInfo.details[monitorId] = fullMonitor;
+        if(this.serviceInfo.details) {
+            this.serviceInfo.details[monitorId] = fullMonitor;
+        }
         return dataTrigger;
     }
 
