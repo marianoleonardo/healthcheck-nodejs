@@ -14,7 +14,19 @@ class HealthChecker {
 
     public registerMonitor(monitor: IComponentDetails, collectFn?: Collector, periodicity?: number): DataTrigger {
         const fullMonitor: IComponentDetailsDynamic = monitor;
-        const monitorId = `${monitor.componentName}:${monitor.measurementName}`;
+        let monitorId;
+        // It is expected that at least one of them is defined
+        if (monitor.componentName) {
+            if (monitor.measurementName) {
+                monitorId = `${monitor.componentName}:${monitor.measurementName}`;
+            }
+            else {
+                monitorId = `${monitor.componentName}`;
+            }
+        }
+        else {
+            monitorId = `${monitor.measurementName}`;
+        }
         const dataTrigger = new DataTrigger(this.serviceInfo, fullMonitor);
         if (periodicity && collectFn) {
             this.runCollector(fullMonitor, dataTrigger, collectFn, periodicity);

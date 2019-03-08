@@ -17,7 +17,12 @@ class DataTrigger {
     public trigger(data: any, status?: ServiceStatus, output?: string) {
         this.fullMonitor.observedValue = data;
         this.fullMonitor.status = status || "pass";
-        this.fullMonitor.output = output || "no-reason";
+        if (this.fullMonitor.status !== "pass") {
+            this.fullMonitor.output = output || "no-reason";
+        }
+        else if (this.fullMonitor.output) {
+            delete this.fullMonitor.output;
+        }
 
         if (this.fullMonitor.status !== "pass") {
             if (this.serviceInfo.status !== "fail") {
