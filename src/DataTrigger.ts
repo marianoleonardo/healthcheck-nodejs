@@ -19,8 +19,7 @@ class DataTrigger {
         this.fullMonitor.status = status || "pass";
         if (this.fullMonitor.status !== "pass") {
             this.fullMonitor.output = output || "no-reason";
-        }
-        else if (this.fullMonitor.output) {
+        } else if (this.fullMonitor.output) {
             delete this.fullMonitor.output;
         }
 

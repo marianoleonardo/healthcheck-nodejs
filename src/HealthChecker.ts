@@ -19,12 +19,10 @@ class HealthChecker {
         if (monitor.componentName) {
             if (monitor.measurementName) {
                 monitorId = `${monitor.componentName}:${monitor.measurementName}`;
-            }
-            else {
+            } else {
                 monitorId = `${monitor.componentName}`;
             }
-        }
-        else {
+        } else {
             monitorId = `${monitor.measurementName}`;
         }
         const dataTrigger = new DataTrigger(this.serviceInfo, fullMonitor);
