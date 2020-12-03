@@ -17,6 +17,10 @@
     "url": "git+https://github.com/dojot/healthcheck-nodejs.git"
   },
   "author": "Giovanni Curiel dos Santos <giovannicuriel@gmail.com>",
+  "contributors": [
+    "Rafael Augusto Scaraficci",
+    "Elias Reis"
+  ],
   "license": "Apache-2.0",
   "licenses": [
     {
