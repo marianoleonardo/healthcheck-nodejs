@@ -1,11 +1,11 @@
 {
   "name": "@dojot/healthcheck",
-  "version": "0.0.1-alpha.3",
+  "version": "0.1.0",
   "description": "healthcheck library for modules",
   "main": "build/index.js",
   "scripts": {
-    "test": "mocha tests/*.test.js --exit",
-    "build": "tsc"
+    "build": "tsc",
+    "check-licenses": "apache2-license-checker"
   },
   "keywords": [
     "healthcheck",
@@ -14,17 +14,30 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/giovannicuriel/healthcheck.git"
+    "url": "git+https://github.com/dojot/healthcheck-nodejs.git"
   },
   "author": "Giovanni Curiel dos Santos <giovannicuriel@gmail.com>",
-  "license": "GPL-3.0",
+  "contributors": [
+    "Rafael Augusto Scaraficci",
+    "Elias Reis"
+  ],
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
   "bugs": {
-    "url": "https://gitlab.com/giovannicuriel/healthcheck/issues"
+    "url": "https://github.com/dojot/healthcheck-nodejs/issues"
   },
-  "homepage": "https://gitlab.com/giovannicuriel/healthcheck#README",
+  "homepage": "https://github.com/dojot/healthcheck-nodejs#readme",
   "dependencies": {
-    "@types/node": "^10.12.0",
     "@types/express": "^4.16.0"
+  },
+  "devDependencies": {
+    "@bbc/apache2-license-checker": "^1.1.4",
+    "typescript": "^4.1.2"
   },
   "types": "./build/index.d.ts"
 }
