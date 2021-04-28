@@ -1,6 +1,6 @@
 {
-  "name": "@marianoleonardo/healthcheck",
-  "version": "0.1.1",
+  "name": "@dojot/healthcheck",
+  "version": "0.1.0",
   "description": "healthcheck library for modules",
   "main": "build/index.js",
   "scripts": {
