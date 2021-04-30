@@ -1,4 +1,4 @@
-name: Dojot-module-logger-nodejs
+name: Healthcheck-nodejs
 
 # Triggered after a branch is created, a tag or a branch is pushed or a PR
 on:
